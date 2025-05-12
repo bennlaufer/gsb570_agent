@@ -85,7 +85,7 @@ def create_salesforce_client():
 
 # --- Read in SCHEMA of Salesforce data ---
 base_path = Path(__file__).resolve().parent
-schema_path = base_path / 'files' / 'salesforce_schema.json'
+schema_path = base_path.parent / 'data' / 'salesforce_schema.json'
 # read & parse
 with schema_path.open('r', encoding='utf-8') as f:
     salesforce_schema = json.load(f)
@@ -174,6 +174,7 @@ def get_soql_from_prompt(prompt, salesforce_schema):
     - Do NOT use aliases (e.g., "TotalRevenue") in the ORDER BY clause.
     - If you use an aggregate function (like SUM, COUNT), repeat the full expression in ORDER BY.
     - Respond with ONLY the SOQL query and nothing else. No explanations or formatting.
+    - Only 1 table at a time should be refrence when doing queries. Do not refrence or attempt to join more than 1 table.
 
     \n\nAssistant:
     """
@@ -188,7 +189,7 @@ def get_soql_from_prompt(prompt, salesforce_schema):
         "messages": messages
     }
     #set model and formats
-    modelId = "anthropic.claude-3-5-sonnet-20240620-v1:0"
+    modelId = "us.anthropic.claude-3-7-sonnet-20250219-v1:0"
     accept = "application/json"
     contentType = "application/json"
 
@@ -236,7 +237,7 @@ salesforce_tool = Tool(
 
 #read in pickle data
 base_path = Path(__file__).resolve().parent
-pickle_path = base_path / 'files' / 'PRIZM_Embedded.pkl'
+pickle_path = base_path.parent / 'data' / 'PRIZM_Embedded.pkl'
 dft = pd.read_pickle(pickle_path)
 
 
