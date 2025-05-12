@@ -1,0 +1,166 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Account": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "Salesforce record ID"
+        },
+        "Name": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "Industry": {
+          "type": "string",
+          "enum": [
+            "Technology",
+            "Healthcare",
+            "Finance",
+            "Retail"
+          ]
+        },
+        "Type": {
+          "type": "string",
+          "enum": [
+            "Customer - Direct",
+            "Prospect",
+            "Partner"
+          ]
+        },
+        "BillingCity": {
+          "type": "string"
+        },
+        "BillingState": {
+          "type": "string",
+          "description": "Full state name"
+        },
+        "BillingCountry": {
+          "type": "string",
+          "enum": [
+            "United States"
+          ]
+        },
+        "AnnualRevenue": {
+          "type": "number"
+        },
+        "NumberOfEmployees": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "Id",
+        "Name"
+      ]
+    },
+    "Contact": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "FirstName": {
+          "type": "string"
+        },
+        "LastName": {
+          "type": "string"
+        },
+        "Title": {
+          "type": "string"
+        },
+        "Email": {
+          "type": "string",
+          "format": "email"
+        },
+        "Phone": {
+          "type": "string"
+        },
+        "MailingCity": {
+          "type": "string"
+        },
+        "MailingState": {
+          "type": "string"
+        },
+        "MailingCountry": {
+          "type": "string"
+        },
+        "AccountId": {
+          "type": "string",
+          "description": "Lookup to Account.Id"
+        }
+      },
+      "required": [
+        "Id",
+        "AccountId"
+      ]
+    },
+    "Opportunity": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "number"
+        },
+        "StageName": {
+          "type": "string",
+          "enum": [
+            "Prospecting",
+            "Qualification",
+            "Proposal",
+            "Closed Won",
+            "Closed Lost"
+          ]
+        },
+        "CloseDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "AccountId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "Id",
+        "Name",
+        "AccountId"
+      ]
+    },
+    "Task": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "type": "string"
+        },
+        "Subject": {
+          "type": "string"
+        },
+        "Status": {
+          "type": "string"
+        },
+        "ActivityDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "WhoId": {
+          "type": "string",
+          "description": "Lookup to Contact.Id"
+        },
+        "WhatId": {
+          "type": "string",
+          "description": "Lookup to Opportunity.Id"
+        }
+      },
+      "required": [
+        "Id",
+        "Subject",
+        "WhoId"
+      ]
+    }
+  }
+}
