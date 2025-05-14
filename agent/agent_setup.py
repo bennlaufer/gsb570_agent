@@ -18,6 +18,7 @@ def setup_agent(schema):
     ]
 
     llm = BedrockChat(
+        client=aws_client,
         model_id="anthropic.claude-3-sonnet-20240229-v1:0",
         model_kwargs={"max_tokens": 2048, "temperature": 0.0}
     )
