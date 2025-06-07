@@ -1,0 +1,10 @@
+# Note: Salesforce data requires your personal API keys to access.
+streamlit
+langchain
+cohere
+simple-salesforce
+boto3
+python-dotenv
+pymysql
+tavily
+pandas
